@@ -9,7 +9,7 @@
 
     <test name="Store API Tests">
         <classes>
-            <!-- ტესტ კლასები აქ დაემატება Layer 4-ში -->
+            <class name="petstore.tests.store.StoreScenarioTests"/>
         </classes>
     </test>
 
