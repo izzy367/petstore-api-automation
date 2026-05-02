@@ -1,0 +1,45 @@
+# Compiled output
+target/
+build/
+*.class
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Allure results & reports
+allure-results/
+allure-report/
+.allure/
+
+# Lombok
+lombok.config
+
+# Environment
+.env
+*.env.local
