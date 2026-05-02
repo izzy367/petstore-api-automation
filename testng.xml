@@ -15,7 +15,7 @@
 
     <test name="User API Tests">
         <classes>
-            <!-- ტესტ კლასები აქ დაემატება Layer 4-ში -->
+            <class name="petstore.tests.user.UserScenarioTests"/>
         </classes>
     </test>
 
