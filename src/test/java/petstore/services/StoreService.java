@@ -5,12 +5,12 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import petstore.models.request.Order;
 
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 /**
  * StoreService — Petstore Store API-ის "POM" კლასი.
- * ყველა Store API call (POST/GET/DELETE order) ცხოვრობს აქ.
- * ტესტები აქედან გამოიძახებენ მეთოდებს, არ წერენ HTTP details-ს.
  */
 public class StoreService {
 
@@ -18,13 +18,30 @@ public class StoreService {
     private static final String STORE_ORDER_BY_ID = "/store/order/{orderId}";
 
     /**
-     * POST /store/order — ახალი შეკვეთის განთავსება.
+     * POST /store/order — ახალი შეკვეთის განთავსება (POJO body).
      */
     @Step("Place an order: {order}")
     public Response placeOrder(Order order) {
         return given()
                 .contentType(ContentType.JSON)
                 .body(order)
+                .when()
+                .post(STORE_ORDER_ENDPOINT)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * POST /store/order — ახალი შეკვეთის განთავსება (raw Map body).
+     * გამოიყენება ნეგატიური ტესტებისთვის, სადაც გვინდა invalid type-ი
+     * (მაგ: id="test" როგორც string ნაცვლად Long-ისა).
+     */
+    @Step("Place an order with raw body: {body}")
+    public Response placeOrderWithRawBody(Map<String, Object> body) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(body)
                 .when()
                 .post(STORE_ORDER_ENDPOINT)
                 .then()

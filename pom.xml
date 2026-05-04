@@ -24,6 +24,7 @@
         <h2.version>2.3.232</h2.version>
         <surefire.version>3.5.2</surefire.version>
         <compiler.version>3.13.0</compiler.version>
+        <resources.version>3.4.0</resources.version>
     </properties>
 
     <dependencies>
@@ -82,7 +83,7 @@
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin: Lombok annotation processor-ის გასააქტიურებლად -->
+            <!-- Maven Compiler Plugin: Lombok annotation processor-ისთვის -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -98,6 +99,34 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+
+            <!-- Resources Copy: environment.properties + categories.json → allure-results/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${resources.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-allure-resources</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/allure-results</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/test/resources</directory>
+                                    <includes>
+                                        <include>environment.properties</include>
+                                        <include>categories.json</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Maven Surefire Plugin: TestNG runner + AspectJ for Allure -->

@@ -16,12 +16,13 @@
     <test name="User API Tests">
         <classes>
             <class name="petstore.tests.user.UserScenarioTests"/>
+            <class name="petstore.tests.user.CreateUsersFromDbTest"/>
         </classes>
     </test>
 
     <test name="Negative Tests">
         <classes>
-            <!-- ტესტ კლასები აქ დაემატება Layer 4-ში -->
+            <class name="petstore.tests.negative.NegativeStoreTests"/>
         </classes>
     </test>
 
